@@ -1,0 +1,82 @@
+model_config = {
+    # model type
+    # mobile_net | resnet50 | resnet101 | alex_net | shuffle_net | light_weight_net |
+    # light_weight_stn_net | resnet50_stn | mobilenet_stn | resnet50_stn_with_2labels |
+    # deeplabv3 | inception_resnet_v2 | mal_function_model ... 
+    "model_name": "", 
+
+    "multi_label": False,  # True | False
+    # whether train from scratch
+    "train_from_scratch": True,  # True | False
+    # pre trained model path
+    "pre_trained_model": "",  # where you put your original model if "train_from_scratch" is false.
+    # dataset type: "images" | "cifar10" | "memory" ...
+    "dataset_type": "memory",
+    # gpu number
+    "gpus": 1,
+    # optimizer
+    "optimizer": {
+        "name": "adam",  # sgd | rms | adam
+        "base_lr": 0.01,  # base learning rate.
+        "momentum": 0.9,  # momentum for SGD learning
+        "rho": 0.9,
+        "lr_decay": 2e-5,  # learning rate decay
+    },
+    # input image shape: (height, width, channel)
+    # if the dataset_type is cifar10, input image shape is (32, 32, 3)
+
+    "input_shape": (128, 128, 3),
+
+    # batch size
+    "batch_size": 32,
+
+    # epoches count
+    "epoches": 1000,
+
+    # class count
+    # if the dataset_type is cifar10, num_class=10
+    "num_class": 2,
+    "num_class2": 2,  # if "multi_label" is true, the num_class of lable2 must be set here.
+    # loss func
+    "loss": "cross_entropy",
+
+    # The label name of each class
+    "label_names": [
+        "abnormal",
+        "normal",
+    ],
+
+    # if "multi_label" is true, please set multi_labels here
+    "multi_labels": {
+        "label_names1": ["open", "close", "abnormal"],
+        "label_names2": ["booth_existed", "booth_not_existed"],
+    },
+    # data augmentation config
+    "data_augmentation_config": {
+        "rescale": 1./255,   # 每个像素放缩的尺度, 归一化０～１
+        "rotation_range": 20, # 图像随机旋转的角度至 0 ~ 180
+        "w_shift": 0, # 水平平移比例
+        "h_shift": 0,  # 竖直平移比例
+        "horizontal_flip": False,   # 是否通过水平翻转来增广数据
+        "vertical_flip": False,  #　是否通过竖直翻转来曾广数据
+        "normalize": False, # 是否归一化数据
+        "shear_range": 0.1, # 平行四边形变换比例
+        "zoom_range": 0.2, # 图像放缩尺度
+    },
+    # train data path
+    # In the training dir, the samples for each class are put in the single sub-dir which is named by class_name.
+    "train_data_dir": "/home/turingvideo/lutao/dataset/黑屏/datas/train",
+    # "train_data_dir": "/home/turingvideo/lutao/dataset/CIFAR/cifar10",
+    # valid data path
+    # In the validating dir, the samples for each class are put in the single sub-dir which is named by class_name.
+    "valid_data_dir": "/home/turingvideo/lutao/dataset/黑屏/datas/valid",
+    # "valid_data_dir": "/home/turingvideo/lutao/dataset/CIFAR/cifar10",
+    # test data path
+    # In the testing dir, the samples for each class are put in the single sub-dir which is named by class_name.
+    "test_data_dir": "/home/turingvideo/lutao/dataset/黑屏/datas/test",
+    # "test_data_dir": "/home/turingvideo/lutao/dataset/CIFAR/cifar10",
+    # log dir
+    "log_dir": "./logs",
+    # trained model saved dir
+    "save_model_dir": "./save_models",
+}

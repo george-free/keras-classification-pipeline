@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.h5
+*.pb
+venv/
+data/
+*vscode/
+logs/
+pretrained_models/
+tools/__pycache__/
+save_models/
+config.py
